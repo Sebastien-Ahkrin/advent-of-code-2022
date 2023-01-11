@@ -15,7 +15,14 @@ export async function run() {
   const elves = getElves(input.split(NEW_LINE));
   const calories = getCalories(elves);
 
-  console.log(calories.sort((a, b) => b - a)[0]);
+  const sorted = calories.sort((a, b) => b - a);
+  const first = sorted[0];
+  const top = sorted.slice(0, 3);
+
+  console.log(
+    first,
+    top.reduce((prev, curr) => prev + curr)
+  );
 }
 
 function getElves(inputs: Array<string>) {
