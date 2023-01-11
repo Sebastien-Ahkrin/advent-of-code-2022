@@ -1,2 +1,4 @@
 extends:
   - zakodium/ts
+rules:
+  no-console: off
