@@ -7,7 +7,7 @@ const inputDir = path.join(__dirname, "../inputs");
 async function exec() {
   const dir = await fs.readdir(path.join(__dirname, "days"));
 
-  for (const completeFileName of dir) {
+  for (const completeFileName of dir.filter((name) => name.includes(".js"))) {
     const fileName = completeFileName.split(".")[0];
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
