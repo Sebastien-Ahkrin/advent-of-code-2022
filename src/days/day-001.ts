@@ -1,17 +1,9 @@
-import fs from "fs/promises";
-import path from "path";
-
 const LINE_SEPARATOR = "";
 const NEW_LINE = "\n";
 
 type Elves = Array<Array<number>>;
 
-export async function run() {
-  const input = await fs.readFile(
-    path.join(__dirname, "../inputs/day-001.txt"),
-    "utf-8"
-  );
-
+export async function run(input: string) {
   const elves = getElves(input.split(NEW_LINE));
   const calories = getCalories(elves);
 
@@ -19,10 +11,10 @@ export async function run() {
   const first = sorted[0];
   const top = sorted.slice(0, 3);
 
-  console.log(
+  return {
     first,
-    top.reduce((prev, curr) => prev + curr)
-  );
+    top: top.reduce((prev, curr) => prev + curr),
+  };
 }
 
 function getElves(inputs: Array<string>) {

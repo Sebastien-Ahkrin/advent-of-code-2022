@@ -1,3 +1,24 @@
-import { run } from "./day-001";
+import fs from "fs/promises";
+import path from "path";
 
-run().catch(console.error);
+const builtDir = path.join(__dirname, "days");
+const inputDir = path.join(__dirname, "../inputs");
+
+async function exec() {
+  const dir = await fs.readdir(path.join(__dirname, "days"));
+
+  for (const completeFileName of dir) {
+    const fileName = completeFileName.split(".")[0];
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const file = require(path.join(builtDir, `${fileName}.js`));
+    const input = await fs.readFile(
+      path.join(inputDir, `${fileName}.txt`),
+      "utf-8"
+    );
+
+    console.log(`RUN: ${fileName}`, await file.run(input));
+  }
+}
+
+exec().catch(console.error);
